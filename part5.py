@@ -33,12 +33,14 @@ dai_contract = w3.eth.contract(
     abi= dai_abi
 )
 
+nonce = w3.eth.getTransactionCount(metaAccount.address)
+
 #Approve ERC20 transfer
 
 approve_tx_dict = dai_contract.functions.approve(
     uniswap_router2_address, amount).buildTransaction({
         'from': metaAccount.address,
-        'nonce': w3.eth.getTransactionCount(metaAccount.address)
+        'nonce': nonce
     }
 )
 approve_tx = w3.eth.account.signTransaction(approve_tx_dict, metaAccount.key)
@@ -56,7 +58,7 @@ gas = 160000
 tx_dict = uniRouter.functions.swapExactTokensForETH(
     amount, amountOutMin, path, metaAccount.address, int(time.time())+10*60).buildTransaction({
         'from': metaAccount.address,
-        'nonce': w3.eth.getTransactionCount(metaAccount.address),
+        'nonce': nonce + 1,
         'value': 0,
         'gas' : gas,
         'gasPrice': w3.eth.gasPrice

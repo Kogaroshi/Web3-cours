@@ -31,7 +31,7 @@ while(True):
                 txLogs = receipt['logs']
                 for l in txLogs:
                     if(l['topics'][0].hex() == '0x476e04c786e60f629af918e59f7b2d948f3b488bf1258cab1bf3a4351521b46f'):
-                        if(l['address'] != postit_address):
+                        if(l['address'] != postit_address and l['address'] not in address_list):
                             address_list.append(l['address'])
     system('clear')
     #print contracts
@@ -41,5 +41,5 @@ while(True):
             abi = postit_abi
         )
         print("Contract at " + a)
-        print("Message " + tempContract.functions.getMessage().call())
-    time.sleep(0.1)
+        print("Message :  " + tempContract.functions.getMessage().call())
+    time.sleep(5)
