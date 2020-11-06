@@ -27,7 +27,8 @@ localAccount = w3.eth.account.from_key(private_key)
 
 #---------Load Metamask account-------------
 
-metaKey = '38dfc048f348c2f3ca2fa5e3558969f0a0b5dd3ed59106e8becd34594afcb617' #Add the new account key
+#export METAKEY='key'
+metaKey = os.environ['METAKEY'] #Add the new account key
 metaAccount = w3.eth.account.from_key(metaKey)
 
 #---------------------------------------
